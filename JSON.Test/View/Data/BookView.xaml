@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="JSON.Test.View.Data.BookView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JSON.Test.View.Data"
+             xmlns:data="clr-namespace:JSON.Test.Data"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Название : " Width="150" />
+                <TextBlock Text="{Binding Q}" Width="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Ревизия : " Width="150" />
+                <TextBox Text="{Binding R}" Width="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Транзакция : " Width="150" />
+                <TextBox Text="{Binding T}" Width="100" />
+            </StackPanel>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+                <ItemsControl x:Name="BookItemsControl" 
+                              ItemsSource="{Binding D.items}" 
+                              HorizontalAlignment="Left">
+                    <ItemsControl.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding items}" x:Name="books">
+                            <StackPanel Orientation="Horizontal">
+                                <Border MaxWidth="400" 
+                                        Background="LightSteelBlue" 
+                                        Margin="10" 
+                                        CornerRadius="5" 
+                                        BorderThickness="2" 
+                                        BorderBrush="Black">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseEnter" >
+                                            <cmd:EventToCommand Command="{Binding Main.OutputVM.SelectedTab.BookSelectionCommand, Mode=OneWay, Source={StaticResource Locator}}">
+                                                <cmd:EventToCommand.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource BookConvert}">
+                                                        <Binding Path="."/>
+                                                        <Binding ElementName="BookItemsControl" Path="ItemsSource"/>
+                                                    </MultiBinding>
+                                                </cmd:EventToCommand.CommandParameter>
+                                            </cmd:EventToCommand>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+
+                                    <StackPanel Margin="10" Orientation="Vertical">
+                                        <!--<StackPanel Orientation="Horizontal">
+                                            <Label Content="Id : " Width="100" />
+                                            <Label Content="{Binding id}" Width="250" />
+                                        </StackPanel>-->
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Имя : " Width="100" />
+                                            <TextBox Text="{Binding name}" Width="250" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Авторы : " Width="100" />
+                                            <ItemsControl x:Name="autorsControl" 
+                                                          ItemsSource="{Binding AutorItems}" 
+                                                          HorizontalAlignment="Left">
+                                                <ItemsControl.ItemTemplate >
+                                                    <HierarchicalDataTemplate ItemsSource="{Binding name}">
+                                                            <StackPanel Orientation="Vertical">
+                                                               
+                                                            <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="{Binding id}" Width="15"/>
+                                                                    <!--<TextBox Text="{Binding name}" Width="180" Margin="5,0,0,0"/>-->
+                                                                <ComboBox SelectedItem="{Binding BindingAutor, Mode=TwoWay}" ItemsSource="{Binding Autors, Mode=OneWay}" DisplayMemberPath="name"></ComboBox>
+                                                                    <!--<Button Width="50" 
+                                                                            Command="{Binding Main.OutputVM.SelectedTab.DeletePhoneCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                                                            Content="Удалить">
+                                                                        <Button.CommandParameter>
+                                                                            <MultiBinding Converter="{StaticResource PhoneConvert}">
+                                                                                <Binding Path="."/>
+                                                                                <Binding ElementName="phonesControl" Path="ItemsSource"/>
+                                                                            </MultiBinding>
+                                                                        </Button.CommandParameter>
+                                                                    </Button>-->
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                    </HierarchicalDataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        <Button Margin="95,0,0,0" Width="60" 
+                                                Command="{Binding Main.OutputVM.SelectedTab.AddAutorCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                                Content="Добавить">
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource BookConvert}">
+                                                    <Binding Path="."/>
+                                                    <Binding ElementName="BookItemsControl" Path="ItemsSource"/>
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                                <!--<Button Height="30" Width="100"
+                                        Command="{Binding Main.OutputVM.SelectedTab.DeleteCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                        Content="Удалить">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource UserConvert}">
+                                            <Binding Path="."/>
+                                            <Binding ElementName="userItemsControl" Path="ItemsSource"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
+                                </Button>-->
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Height="30" Width="100" 
+                        Content="Добавить" 
+                        HorizontalAlignment="Left" 
+                        Margin="50,10,0,0"
+                        Command="{Binding Main.OutputVM.SelectedTab.AddItemCommand, Mode=OneWay, Source={StaticResource Locator}}"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

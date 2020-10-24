@@ -1,0 +1,42 @@
+{
+  "Q": "BOOKS",
+  "R": 1,
+  "T": 1542026797,
+  "D":
+  {
+    "count": 3,
+    "items":
+    [
+      {
+        "id": 1,
+        "name": "C# for prefessionals ",
+        "authors": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Clear Code",
+        "authors": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Programmer",
+        "authors": [
+          {
+            "id": 3
+          },
+          {
+            "id": 4
+          }
+        ]
+      }
+    ]
+  }
+}

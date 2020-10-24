@@ -1,0 +1,7 @@
+-----
+
+/-----
+{"Q":"USERS","R":1,"T":443,"D":{"count":0,"items":[{"name":"Евгений","login":"ЖЕКА","group":1,"phones":[{"id":1,"value":"8-123-456-78-90"},{"id":2,"value":"8-098-765-43-21"}]},{"name":"Александр","login":"САНЯ","group":1,"phones":[{"id":1,"value":"8-111-222-33-44"},{"id":2,"value":"8-555-666-77-88"}]},{"name":"Игорь","login":"ГРОМ","group":2,"phones":[{"id":1,"value":"8-000-000-00-00"},{"id":2,"value":null}]}]}}
+/-----
+{"Q":"HOUSES","R":1,"T":0,"D":{"count":0,"items":[{"name":"Волк","address":"Тамбов","type":3,"flors":5},{"name":"Заяц","address":"Лес","type":4,"flors":1}]}}
+/-----

@@ -1,0 +1,68 @@
+﻿<Application x:Class="JSON.Test.App"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+			xmlns:local="clr-namespace:JSON.Test" 
+			StartupUri="View/MainView.xaml" 
+			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			d1p1:Ignorable="d" 
+			xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:output="clr-namespace:JSON.Test.ViewModel"
+            xmlns:tab="clr-namespace:JSON.Test.View.Tabs"
+            xmlns:conv="clr-namespace:JSON.Test.View">
+  <Application.Resources>
+    <ResourceDictionary>
+      <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:JSON.Test.ViewModel" />
+            <conv:UserConverter x:Key="UserConvert" />
+            <conv:HouseConverter x:Key="HouseConvert" />
+            <conv:PhoneConverter x:Key="PhoneConvert" />
+      <conv:AutorConverter x:Key="AutorConvert" />
+      <conv:BookConverter x:Key="BookConvert" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type output:StartTab}">
+                        <tab:StartPageTabView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type output:UsersTab}">
+                        <tab:UsersTabView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type output:HousesTab}">
+                        <tab:HousesTabView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type output:AutorTab}">
+                        <tab:AutorTabView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type output:BookTab}">
+                        <tab:BookTabView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type output:UnrecognizedTab}">
+                        <tab:UnrecognizedTabView />
+                    </DataTemplate>
+
+                    <Style x:Key="CloseButtonStyle" TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <Ellipse Name="BG"/>
+                                        <Path Name="PATH" Stroke="Gray" StrokeThickness="2" Stretch="Fill"
+                      Data="M 0 0 M 0.3 0.3 L 0.7 0.7 M 0.3 0.7 L 0.7 0.3 M 1 1"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="BG" Property="Fill" Value="#DB4437"/>
+                                            <Setter TargetName="PATH" Property="Stroke" Value="White"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="BG" Property="Fill" Value="#A8352A"/>
+                                            <Setter TargetName="PATH" Property="Stroke" Value="White"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+  </Application.Resources>
+</Application>
